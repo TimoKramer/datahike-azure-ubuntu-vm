@@ -1,0 +1,53 @@
+* Deploy Ubuntu VM with Running Datahike Server
+
+- datahike running on port 3000
+
+** Deploy
+  In order to deploy this template you have different options described here: https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/
+
+*** Deploy via Linux CLI
+    Prerequisites:
+    - Get a free Azure Subscription here: https://azure.microsoft.com/en-us/free/
+    - Install the Azure CLI like documented here: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+    - Generate an SSH-key, this seems to be a good default: https://stribika.github.io/2015/01/04/secure-secure-shell.html#server-keygen
+    - Put the private SSH-Key into ~/.ssh/id_rsa
+    - Put the public SSH-Key into ~/.ssh/id_rsa.pub or change the path in the command
+
+    #+BEGIN_SRC sh
+    az login
+    #+END_SRC
+    #+BEGIN_SRC sh
+    az group create --name datahike --location northeurope --output table
+    #+END_SRC
+
+    #+RESULTS:
+    | Location    | Name     |
+    | ----------- | -------- |
+    | northeurope | datahike |
+
+    #+BEGIN_SRC sh
+      az deployment group create --name datahike-ubuntu-test \
+                                 --resource-group datahike \
+                                 --template-file "./azuredeploy.json" \
+                                 --parameters adminUsername=datahike \
+                                 --parameters adminPasswordOrKey=@~/.ssh/id_rsa.pub \
+                                 --output table
+    #+END_SRC
+
+    #+RESULTS:
+    | Name                 | ResourceGroup   | State     | Timestamp                        | Mode        |
+    | -------------------- | --------------- | --------- | -------------------------------- | ----------- |
+    | datahike-ubuntu-test | datahike        | Succeeded | 2020-06-04T20:06:21.755948+00:00 | Incremental |
+
+
+    #+BEGIN_SRC sh
+    az deployment group delete -n datahike-ubuntu-test -g datahike
+    #+END_SRC
+
+    #+RESULTS:
+
+    #+BEGIN_SRC sh
+    az group delete -n datahike --yes
+    #+END_SRC
+
+    #+RESULTS:
