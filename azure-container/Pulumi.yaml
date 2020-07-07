@@ -1,0 +1,14 @@
+name: datahike-on-azure
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Running Datahike in a container on Azure with file backend
+template:
+  config:
+    azure:environment:
+      description: The Azure environment to use (`public`, `usgovernment`, `german`, `china`)
+      default: public
+    azure:location:
+      description: The Azure location to deploy resources to (e.g., `eastus` or `westeurope`)
+      default: WestEurope

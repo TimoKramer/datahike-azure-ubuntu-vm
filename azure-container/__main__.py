@@ -1,6 +1,5 @@
 import pulumi
-from pulumi import Output
-from pulumi_azure import core, compute, network, containerservice
+from pulumi_azure import core, containerservice
 
 config = pulumi.Config("datahike-web")
 
