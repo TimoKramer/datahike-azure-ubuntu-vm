@@ -2,7 +2,7 @@ import pulumi
 import pulumi_azure as azure
 
 
-config = pulumi.Config("datahike-web")
+config = pulumi.Config()
 
 resource_group = azure.core.ResourceGroup("datahike-resource-group")
 

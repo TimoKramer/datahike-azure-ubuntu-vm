@@ -11,4 +11,4 @@ template:
       default: public
     azure:location:
       description: The Azure location to deploy resources to (e.g., `eastus` or `westeurope`)
-      default: WestEurope
+      default: westeurope

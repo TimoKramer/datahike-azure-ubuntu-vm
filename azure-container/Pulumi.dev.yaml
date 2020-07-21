@@ -1,5 +1,0 @@
-config:
-  azure:environment: public
-  azure:location: WestEurope
-  datahike-web:password: Hunter2hunter2
-  datahike-web:username: datahike
